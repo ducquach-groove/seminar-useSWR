@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useSWRInfinite from 'swr/infinite';
+import { urlList } from "./api";
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 const getKey = (pageIndex, previousPageData) => {
-  const limit = 500;
-  if (previousPageData && !previousPageData?.results.length) return null // reached the end
-  return `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${pageIndex*limit}` // SWR key
+  const limit = 100;
+  if (previousPageData && !previousPageData?.length) return null // reached the end
+  return `${urlList}?limit=${limit}&offset=${pageIndex*limit}` // SWR key
 }
 
 function Pagination() {
@@ -17,7 +18,7 @@ function Pagination() {
     if (!isReachingEnd && data?.length) {
       const last = data[data.length - 1];
 
-      if (!last.next) {
+      if (!last.length) {
         setReachingEnd(true);
       }
     }
@@ -30,8 +31,8 @@ function Pagination() {
     <div className="App">
       <button disabled={isReachingEnd} onClick={() => setSize(size + 1)}>Load More</button>
       <ul>
-        {data?.map(({ results }) => results.map((item, index) => (<li key={index}>
-          <p>{item.name}</p>
+        {data?.map(array => array.map(({ id, username, email}) => (<li key={id}>
+          <p>{`${username} - ${email}`}</p>
         </li>)))}
       </ul>
     </div>
