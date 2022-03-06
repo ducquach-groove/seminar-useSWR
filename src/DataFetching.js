@@ -2,10 +2,12 @@ import React from "react";
 import useSWR from "swr";
 import isEmpty from "lodash/isEmpty";
 import URL from "./api";
+import User from "./User";
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 function DataFetching() {
+  const wrongId = "507f1f77bcf86cd799439011";
   const id = "5ca4bbcea2dd94ee58162a68";
   const { data, error } = useSWR(`${URL}/${id}`, fetcher);
 
@@ -17,11 +19,7 @@ function DataFetching() {
   }
 
   return (
-    <div className="App">
-      <h2>{data.name}</h2>
-      <p>{data.username}</p>
-      <p>{data.email}</p>
-    </div>
+    <User data={data} />
   );
 }
 
