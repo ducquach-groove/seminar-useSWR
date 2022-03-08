@@ -9,7 +9,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 function DataFetching() {
   const wrongId = "507f1f77bcf86cd799439011";
   const id = "5ca4bbcea2dd94ee58162a68";
-  const { data, error } = useSWR(`${URL}/${id}`, fetcher);
+  const { data, error } = useSWR(`${URL}/${wrongId}`, fetcher);
 
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>

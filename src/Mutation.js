@@ -41,7 +41,7 @@ function Mutation() {
   const onMutateManuallyHandler = useCallback(async formValue => {
     const newData = {
       ...data,
-      username: formValue
+      username: `${formValue} LOCAL`
     };
     // update the local data immediately, but disable the revalidation
     mutate(newData, false);

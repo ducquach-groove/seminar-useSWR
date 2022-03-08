@@ -8,13 +8,14 @@ describe("DataFetching", () => {
   it("Load success", () => {
     useSWR.mockImplementation(() => ({
       data: {
-        email: "arroyocolton@gmail.com",
-        username: "Duc"
+        name: "Duc",
+        email: "duc.q@groove.com",
+        username: "duc.groove"
       },
       error: undefined
     }))
     render(<DataFetching />);
-    expect(screen.getByText("arroyocolton@gmail.com")).toBeInTheDocument();
+    expect(screen.getByText("duc.groove")).toBeInTheDocument();
   });
 
   it("Load Failed", () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useSWRInfinite from "swr/infinite";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -33,10 +33,10 @@ function Pagination() {
   const [isReachingEnd, setReachingEnd] = useState(false);
   const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher);
 
-  const onSelectUser = id => {
+  const onSelectUser = useCallback(id => {
     setLastSelected(id);
     handleOpen();
-  }
+  }, []);
 
   useEffect(() => {
     if (!isReachingEnd && data?.length) {

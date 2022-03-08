@@ -19,7 +19,7 @@ export default function UserForm({ open, onClose, id = undefined }) {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogContent>
-        <User data={data} />
+        <User data={data} showFull />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
